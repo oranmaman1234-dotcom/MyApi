@@ -9,9 +9,11 @@ exports.createBusiness = async (req, res) => {
   }
 };
 
-exports.getBusinesses = async (req, res) => {
+exports.getBusinessesByUser = async (req, res) => {
   try {
-    const businesses = await Business.find();
+    const businesses = await Business.find({
+      ownerUid: req.params.firebaseUid
+    });
     res.json(businesses);
   } catch (err) {
     res.status(500).json({ error: err.message });
