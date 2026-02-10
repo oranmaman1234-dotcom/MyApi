@@ -1,21 +1,28 @@
+// controllers/businessController.js
 const Business = require("../models/Business");
 
-exports.createBusiness = async (req, res) => {
+// Create a business
+const createBusiness = async (req, res) => {
   try {
-    const business = await Business.create(req.body);
-    res.status(201).json(business);
-  } catch (err) {
-    res.status(400).json({ error: err.message });
-  }
-};
-
-exports.getBusinessesByUser = async (req, res) => {
-  try {
-    const businesses = await Business.find({
-      ownerUid: req.params.firebaseUid
-    });
-    res.json(businesses);
+    const newBusiness = new Business(req.body);
+    const saved = await newBusiness.save();
+    res.status(201).json(saved);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
+};
+
+// Get all businesses
+const getBusinesses = async (req, res) => {
+  try {
+    const businesses = await Business.find();
+    res.status(200).json(businesses);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+module.exports = {
+  createBusiness,
+  getBusinesses,
 };
