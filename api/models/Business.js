@@ -2,14 +2,18 @@ const mongoose = require("mongoose");
 
 const BusinessSchema = new mongoose.Schema({
   ownerUid: {
-    type: String, // firebase uid
+    type: String,
+    required: true
+  },
+  ownerName: {          // ✅ הוספנו
+    type: String,
     required: true
   },
   name: {
     type: String,
     required: true
   },
-  address: {
+  address: { 
     type: String,
     required: true
   }

@@ -1,12 +1,31 @@
 // controllers/businessController.js
+
 const Business = require("../models/Business");
 
 // Create a business
 const createBusiness = async (req, res) => {
   try {
-    const newBusiness = new Business(req.body);
+    const { ownerUid, ownerName, name, address } = req.body;
+
+    const newBusiness = new Business({
+      ownerUid,
+      ownerName,
+      name,
+      address
+    });
+
     const saved = await newBusiness.save();
-    res.status(201).json(saved);
+
+    res.status(201).json({
+      businessId: saved._id,
+      ownerUid: saved.ownerUid,
+      ownerName: saved.ownerName,
+      name: saved.name,
+      address: saved.address,
+      createdAt: saved.createdAt,
+      updatedAt: saved.updatedAt
+    });
+
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -16,7 +35,19 @@ const createBusiness = async (req, res) => {
 const getBusinesses = async (req, res) => {
   try {
     const businesses = await Business.find();
-    res.status(200).json(businesses);
+
+    const formatted = businesses.map(b => ({
+      businessId: b._id,
+      ownerUid: b.ownerUid,
+      ownerName: b.ownerName,
+      name: b.name,
+      address: b.address,
+      createdAt: b.createdAt,
+      updatedAt: b.updatedAt
+    }));
+
+    res.status(200).json(formatted);
+
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

@@ -6,6 +6,10 @@ const InventoryItemSchema = new mongoose.Schema({
     ref: "Business",
     required: true
   },
+  productId: {          // ✅ תואם לאנדרואיד
+    type: String,
+    required: true
+  },
   name: {
     type: String,
     required: true
@@ -17,6 +21,10 @@ const InventoryItemSchema = new mongoose.Schema({
   minQuantity: {
     type: Number,
     required: true
+  },
+  lastUpdated: {        // ✅ תואם לאנדרואיד
+    type: Date,
+    default: Date.now
   }
 }, { timestamps: true });
 

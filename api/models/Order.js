@@ -6,6 +6,10 @@ const OrderSchema = new mongoose.Schema({
     ref: "Business",
     required: true
   },
+  productId: {        // ✅ תואם לאנדרואיד
+    type: String,
+    required: true
+  },
   price: {
     type: Number,
     required: true
@@ -14,6 +18,10 @@ const OrderSchema = new mongoose.Schema({
     type: String,
     enum: ["CREATED", "COMPLETED", "CANCELLED"],
     default: "CREATED"
+  },
+  closedAt: {         // ✅ תואם לאנדרואיד
+    type: Date,
+    default: null
   }
 }, { timestamps: true });
 
