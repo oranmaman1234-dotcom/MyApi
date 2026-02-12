@@ -16,6 +16,10 @@ const BusinessSchema = new mongoose.Schema({
   address: { 
     type: String,
     required: true
+  },
+    pic: { 
+    type: String,
+    required: true
   }
 }, { timestamps: true });
 

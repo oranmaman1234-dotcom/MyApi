@@ -5,13 +5,14 @@ const Business = require("../models/Business");
 // Create a business
 const createBusiness = async (req, res) => {
   try {
-    const { ownerUid, ownerName, name, address } = req.body;
+    const { ownerUid, ownerName, name, address, pic} = req.body;
 
     const newBusiness = new Business({
       ownerUid,
       ownerName,
       name,
-      address
+      address ,
+      pic
     });
 
     const saved = await newBusiness.save();
@@ -22,6 +23,7 @@ const createBusiness = async (req, res) => {
       ownerName: saved.ownerName,
       name: saved.name,
       address: saved.address,
+      pic:saved.pic,
       createdAt: saved.createdAt,
       updatedAt: saved.updatedAt
     });
@@ -42,6 +44,7 @@ const getBusinesses = async (req, res) => {
       ownerName: b.ownerName,
       name: b.name,
       address: b.address,
+      pic:saved.pic,
       createdAt: b.createdAt,
       updatedAt: b.updatedAt
     }));
